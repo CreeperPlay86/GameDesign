@@ -34,11 +34,20 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move.normalized * speed * Time.deltaTime);
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velosity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        {
+            speed = 24f;
+        }
+        else
+        {
+            speed = 12f;
         }
 
         velosity.y += gravity * Time.deltaTime;
