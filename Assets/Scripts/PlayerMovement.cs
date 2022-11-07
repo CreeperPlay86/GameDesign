@@ -29,14 +29,14 @@ public class PlayerMovement : MonoBehaviour
             velosity.y = -2f;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
 
         controller.Move(move.normalized * speed * Time.deltaTime);
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velosity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }

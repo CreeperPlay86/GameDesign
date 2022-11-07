@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
+    private Camera fpsCam;
 
     public int maxAmmo = 10;
     private int currentAmmo;
@@ -14,12 +15,13 @@ public class Gun : MonoBehaviour
     
 
     public ParticleSystem muzzleFlash;
-    public Camera fpsCam;
+
 
     private float nextTimeToFire = 0f;
 
     void Start()
     {
+        fpsCam = Camera.main;
         if (currentAmmo == -1)
             currentAmmo = maxAmmo;   
     }
@@ -53,7 +55,8 @@ public class Gun : MonoBehaviour
         currentAmmo--;
 
         RaycastHit hit;
-        if (Physics.Raycast(muzzleFlash.transform.position, fpsCam.transform.forward, out hit, range))
+        Debug.DrawLine(fpsCam.transform.position, fpsCam.transform.forward * range,Color.red);
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
 
