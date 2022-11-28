@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
+
 public class Gun : MonoBehaviour
 {
     public float damage = 10f;
@@ -14,9 +14,6 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     public float reloadTime = 1f;
 
-    private AudioSource audioSource;
-    [SerializeField] private AudioClip[] shootSounds;
-
     public ParticleSystem muzzleFlash;
 
 
@@ -24,7 +21,7 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+
         fpsCam = Camera.main;
         if (currentAmmo == -1)
             currentAmmo = maxAmmo;   
@@ -55,9 +52,6 @@ public class Gun : MonoBehaviour
     void Shoot()
     {
         muzzleFlash.Play();
-
-        audioSource.clip = shootSounds[Random.Range(0,shootSounds.Length)];
-        audioSource.Play();
 
         currentAmmo--;
 

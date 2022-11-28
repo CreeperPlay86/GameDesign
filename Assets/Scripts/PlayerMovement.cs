@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
+
+    public float health = 100f;
+    public Image healthBar;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -53,5 +57,23 @@ public class PlayerMovement : MonoBehaviour
         velosity.y += gravity * Time.deltaTime;
 
         controller.Move(velosity * Time.deltaTime);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        healthBar.fillAmount = health / 100;
+
+        health -= amount;
+        if (health <= 0f)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+
+
+        Destroy(gameObject);
     }
 }
